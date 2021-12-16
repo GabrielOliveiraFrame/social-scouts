@@ -1,0 +1,33 @@
+<div class="row min-vh-90 align-items-center justify-content-center">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header">
+        <h4>Olá, bem vindo(a)!</h4>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title mb-4">Inicialização de Campeonato</h5>
+        <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+
+          <div class="form-group">
+            <label for="numberOfTeams">Nº de times</label>
+            <input type="number" class="form-control" id="numberOfTeams"
+            formControlName="numberOfTeams" autocomplete="off">
+          </div>
+          <div class="form-group">
+            <label for="teams-size">Nº de jogadores por equipe</label>
+            <input type="number" class="form-control" id="teams-size"
+            formControlName="teamsSize" autocomplete="off">
+          </div>
+
+          <div *ngIf="!formulario.valid" class="alert alert-warning" role="alert">
+            <small>Os campos são obrigatórios, por gentileza, preencha-os</small>
+          </div>
+
+          <div class="float-right">
+            <button type="submit" class="btn btn-success">Avançar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

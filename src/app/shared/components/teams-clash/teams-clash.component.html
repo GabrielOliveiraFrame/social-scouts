@@ -1,0 +1,105 @@
+<div class="row min-vh-75 align-items-center justify-content-around">
+  <div *ngIf="!generatedLink" class="col-md-6">
+    <div class="card my-4">
+      <div class="card-header">
+        <h4>Fonte de Scouts</h4>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title mb-4">Cadastro do Video</h5>
+        <form [formGroup]="formularioLink" (ngSubmit)="onSubmitLink()">
+          <div class="form-group">
+            <label for="link">Link do Youtube</label>
+            <input type="text" class="form-control" id="link" formControlName="link" autocomplete="off">
+          </div>
+
+          <div *ngIf="!formularioLink.valid" class="alert alert-warning" role="alert">
+            <small>Informar um link é obrigatório, por gentileza, preencha o campo acima</small>
+          </div>
+
+          <div class="float-right">
+            <button type="submit" class="btn btn-success">Enviar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="generatedLink" class="col-md-6 my-4">
+    <iframe width="100%" height="330px" class="my-4 rounded" [src]="getSafeUrl()" title="YouTube video player"
+      frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+    </iframe>
+  </div>
+
+  <div class="col-md-6">
+    <form [formGroup]="formularioScout">
+      <div *ngFor="let team of clashs[clashsIndex]; let i = index" class="card my-4">
+        <div class="card-header">
+          <h4>Time {{i+1}}</h4>
+        </div>
+        <div class="card-body">
+          <div *ngFor="let player of team" class="form-check mb-2">
+            <input class="form-check-input" type="radio" name="player" id="{{player.name}}"
+            value="{{player.name}}" formControlName="player">
+            <label class="form-check-label" for="{{player.name}}">
+              {{player.name}}
+            </label>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <div class="card my-4">
+      <div class="card-header">
+        <h4>Marcar novo Lance</h4>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title mb-4">Scout</h5>
+        <form [formGroup]="formularioScout" (ngSubmit)="onSubmitScouts()">
+          <div class="form-check mb-2" *ngFor="let scout of scouts" >
+            <input class="form-check-input" type="radio" name="scout" id={{scout}}
+            value={{scout}} formControlName="scout">
+            <label class="form-check-label" for={{scout}}>
+              {{scout}}
+            </label>
+          </div>
+
+          <div class="mt-3">
+            <label for="description">Descrição</label>
+            <input type="text" class="form-control" id="description" formControlName="description"
+            autocomplete="off">
+          </div>
+
+          <div class="mt-3 mb-3">
+            <label for="time">Minuto do Jogo</label>
+            <input type="text" class="form-control" id="time" formControlName="time"
+            autocomplete="off" timeMask [control]="formularioScout.get('time')">
+          </div>
+
+          <div *ngIf="!formularioScout.valid" class="alert alert-warning" role="alert">
+            <small>Selecionar um jogador e informar os campos presentes nessa área é obrigatório,
+              por gentileza, conclua o formulário
+            </small>
+          </div>
+
+          <div class="float-right">
+            <button type="submit" class="btn btn-success">Criar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row justify-content-center pb-3">
+  <div class="col-md-8">
+    <app-match-summary class="pl-0" [summary]="summary" [link]="url"></app-match-summary>
+    <button type="button" class="btn btn-dark btn-lg btn-block" *ngIf="clashsIndex < clashs.length - 1"
+    (click)="nextClash()">Próximo Confronto</button>
+  </div>
+</div>
+

@@ -1,0 +1,16 @@
+<div class="row min-vh-90 align-items-center justify-content-around">
+  <div *ngFor="let team of teams; let i = index" class="card w-75 my-3">
+    <div class="card-header">
+      <h5>Time {{i+1}}</h5>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title mb-4">Jogadores(as)</h5>
+      <p *ngFor="let player of team" class="card-text">• {{player.name}}</p>
+    </div>
+  </div>
+
+  <div class="w-75 text-center my-2">
+    <button class="btn btn-dark btn-lg btn-block" (click)="navigate()">Começar Confronto(s)</button>
+  </div>
+</div>
+
