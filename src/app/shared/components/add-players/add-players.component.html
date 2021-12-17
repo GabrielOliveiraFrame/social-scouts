@@ -5,16 +5,16 @@
         <h4>Fase de Preparação</h4>
       </div>
       <div class="card-body">
-        <h5 class="card-title mb-4">Cadastro de Jogadores</h5>
+        <h5 class="card-title mb-4">Cadastro de Jogadores(as)</h5>
         <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
           <div class="form-group">
-            <label for="name">Nome do Jogador</label>
+            <label for="name">Nome</label>
             <input type="text" class="form-control" id="name" formControlName="name"
             autocomplete="off" autofocus>
           </div>
 
           <div *ngIf="!formulario.valid" class="alert alert-warning" role="alert">
-            <small>Informar um atleta é obrigatório, por gentileza, preencha o campo acima</small>
+            <small>Informar um(a) atleta é obrigatório, por gentileza, preencha o campo acima</small>
           </div>
 
           <div class="float-right">
