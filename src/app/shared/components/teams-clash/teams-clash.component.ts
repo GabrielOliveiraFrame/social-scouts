@@ -83,6 +83,7 @@ export class TeamsClashComponent implements OnInit {
   nextClash(){
     this.summary = [];
     this.clashsIndex++;
+    window.scroll(0,0);
   }
 
 }
